@@ -1,0 +1,14 @@
+img = im2double(imread('sw.jpg'));  
+gaussian_noise = imnoise(img, 'gaussian', 0, 0.01);  
+figure, imshow(gaussian_noise); title('Gaussian Noise'); 
+
+salt_pepper_noise = imnoise(img, 'salt & pepper', 0.05);  
+figure, imshow(salt_pepper_noise); title('Salt & Pepper Noise'); 
+
+speckle_noise = imnoise(img, 'speckle', 0.04);  
+figure, imshow(speckle_noise); title('Speckle Noise');  
+
+avg_filter = fspecial('average', [5 5]);  
+img_avg = imfilter(gaussian_noise, avg_filter);  
+figure, imshow(img_avg); title('Averaging Filter Applied'); 
+
