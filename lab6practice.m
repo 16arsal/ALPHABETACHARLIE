@@ -70,3 +70,20 @@ img_restored = real(ifft2(F_restored));
 
 % Display Restored Image
 figure, imshow(img_restored, []); title('Inverse Filtering');
+
+img_wiener = deconvwnr(blurred_img, H, 0.01);  
+figure, imshow(img_wiener, []); title('Wiener Filter Restored'); 
+
+PSF = fspecial('motion', 20, 45);  
+[J, P] = deconvblind(blurred_img, PSF);  
+figure, imshow(J, []); title('Blind Deconvolution');
+
+moving = imrotate(img, 10, 'bilinear', 'crop');  
+[tform, ~] = imregcorr(moving, img);  
+registered_img = imwarp(moving, tform, 'OutputView', imref2d(size(img)));  
+figure, imshowpair(img, registered_img, 'montage'); title('Image Registration'); 
+
+moving = imrotate(img, 10, 'bilinear', 'crop');  
+[tform, ~] = imregcorr(moving, img);  
+registered_img = imwarp(moving, tform, 'OutputView', imref2d(size(img)));  
+figure, imshowpair(img, registered_img, 'montage'); title('Image Registration'); 
