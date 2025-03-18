@@ -18,7 +18,8 @@ binary_img = img > threshold;
 figure, imshow(binary_img), title('Thresholded Image'); 
  
 % Log & Power-Law Transformations 
-c = 255 / log(1 + max(double(img(:)))); 
+c = 255 / log(1 + max(double(img(:))));
+
 log_img = uint8(c * log(1 + double(img))); 
 figure, imshow(log_img), title('Log Transformation'); 
  

@@ -64,15 +64,17 @@ rotated_img = flipud(gray_img');  % Transpose and flip upside-down
 figure, imshow(rotated_img);
 title('Rotated Image (90°)');
 
-% block_size = 8;  % Change to 4 if needed
-% 
-% % Crop image to be a multiple of block_size num_rows = floor(rows /
-% block_size) * block_size; num_cols = floor(cols / block_size) *
-% block_size; cropped_img = gray_img(1:num_rows, 1:num_cols);
-% 
-% % Split into Blocks blocks = mat2cell(cropped_img, repmat(block_size, 1,
-% num_rows/block_size), repmat(block_size, 1, num_cols/block_size));
-% 
-% % Display All Blocks montage(blocks, 'Size', [num_rows/block_size,
-% num_cols/block_size]); title(['Non-Overlapping ', num2str(block_size),
-% 'x', num2str(block_size), ' Blocks']);
+block_size = 8;  % Change to 4 if needed
+
+% Crop image to be a multiple of block_size 
+num_rows = floor(rows /block_size) * block_size;
+num_cols = floor(cols / block_size) * block_size; 
+
+cropped_img = gray_img(1:num_rows, 1:num_cols);
+
+% Split into Blocks 
+blocks = mat2cell(cropped_img, repmat(block_size, 1,num_rows/block_size), repmat(block_size, 1, num_cols/block_size));
+
+% Display All Blocks 
+montage(blocks, 'Size', [num_rows/block_size, num_cols/block_size]); title(['Non-Overlapping ', num2str(block_size),
+'x', num2str(block_size), ' Blocks']);
